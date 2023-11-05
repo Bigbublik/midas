@@ -1,0 +1,10 @@
+$schema: https://json-schema.org/draft/2020-12/schema,
+title: Bookticker Intermediate Entity,
+type: object,
+properties:
+  id: { type: "string" }
+  symbol: { type: "string" }
+  bid_price: { type: "string" }
+  bid_qty: { type: "string" }
+  ask_price: { type: "string" }
+  ask_qty: { type: "string" }
