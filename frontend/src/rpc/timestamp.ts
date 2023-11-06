@@ -1,42 +1,27 @@
 // To parse this data:
 //
-//   import { Convert, Bot } from "./file";
+//   import { Convert, Timestamp } from "./file";
 //
-//   const bot = Convert.toBot(json);
+//   const timestamp = Convert.toTimestamp(json);
 //
 // These functions will throw an error if the JSON doesn't
 // match the expected interface, even if the JSON is valid.
 
-export interface Bot {
-    base_currency?:  string;
-    condition?:      string;
-    created_at?:     TimestampSchema;
-    exchange?:       ExchangeEntity;
-    id?:             string;
-    name?:           string;
-    trading_amount?: string;
-    [property: string]: any;
-}
-
-export interface TimestampSchema {
+export interface Timestamp {
     nanos?:   number;
     seconds?: number;
     [property: string]: any;
 }
 
-export enum ExchangeEntity {
-    Binance = "binance",
-}
-
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toBot(json: string): Bot {
-        return cast(JSON.parse(json), r("Bot"));
+    public static toTimestamp(json: string): Timestamp {
+        return cast(JSON.parse(json), r("Timestamp"));
     }
 
-    public static botToJson(value: Bot): string {
-        return JSON.stringify(uncast(value, r("Bot")), null, 2);
+    public static timestampToJson(value: Timestamp): string {
+        return JSON.stringify(uncast(value, r("Timestamp")), null, 2);
     }
 }
 
@@ -193,20 +178,8 @@ function r(name: string) {
 }
 
 const typeMap: any = {
-    "Bot": o([
-        { json: "base_currency", js: "base_currency", typ: u(undefined, "") },
-        { json: "condition", js: "condition", typ: u(undefined, "") },
-        { json: "created_at", js: "created_at", typ: u(undefined, r("TimestampSchema")) },
-        { json: "exchange", js: "exchange", typ: u(undefined, r("ExchangeEntity")) },
-        { json: "id", js: "id", typ: u(undefined, "") },
-        { json: "name", js: "name", typ: u(undefined, "") },
-        { json: "trading_amount", js: "trading_amount", typ: u(undefined, "") },
-    ], "any"),
-    "TimestampSchema": o([
+    "Timestamp": o([
         { json: "nanos", js: "nanos", typ: u(undefined, 0) },
         { json: "seconds", js: "seconds", typ: u(undefined, 0) },
     ], "any"),
-    "ExchangeEntity": [
-        "binance",
-    ],
 };

@@ -4,34 +4,28 @@
 // extern crate serde_derive;
 // extern crate serde_json;
 //
-// use generated_module::bot;
+// use generated_module::position;
 //
 // fn main() {
 //     let json = r#"{"answer": 42}"#;
-//     let model: bot = serde_json::from_str(&json).unwrap();
+//     let model: position = serde_json::from_str(&json).unwrap();
 // }
 
 use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Bot {
-    pub base_currency: Option<String>,
-    pub condition: Option<String>,
-    pub created_at: Option<TimestampSchema>,
-    pub exchange: Option<ExchangeEntity>,
+pub struct Position {
+    pub bot_id: Option<String>,
     pub id: Option<String>,
-    pub name: Option<String>,
+    pub status: Option<PositionStatusSchema>,
+    pub symbol: Option<String>,
     pub trading_amount: Option<String>,
-}
-
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct TimestampSchema {
-    pub nanos: Option<i64>,
-    pub seconds: Option<i64>,
+    pub validation: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
-pub enum ExchangeEntity {
-    Binance,
+pub enum PositionStatusSchema {
+    Closed,
+    Open,
 }

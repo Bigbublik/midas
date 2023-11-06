@@ -1,42 +1,36 @@
 // To parse this data:
 //
-//   import { Convert, Bot } from "./file";
+//   import { Convert, Position } from "./file";
 //
-//   const bot = Convert.toBot(json);
+//   const position = Convert.toPosition(json);
 //
 // These functions will throw an error if the JSON doesn't
 // match the expected interface, even if the JSON is valid.
 
-export interface Bot {
-    base_currency?:  string;
-    condition?:      string;
-    created_at?:     TimestampSchema;
-    exchange?:       ExchangeEntity;
+export interface Position {
+    bot_id?:         string;
     id?:             string;
-    name?:           string;
+    status?:         PositionStatusSchema;
+    symbol?:         string;
     trading_amount?: string;
+    validation?:     string;
     [property: string]: any;
 }
 
-export interface TimestampSchema {
-    nanos?:   number;
-    seconds?: number;
-    [property: string]: any;
-}
-
-export enum ExchangeEntity {
-    Binance = "binance",
+export enum PositionStatusSchema {
+    Closed = "closed",
+    Open = "open",
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toBot(json: string): Bot {
-        return cast(JSON.parse(json), r("Bot"));
+    public static toPosition(json: string): Position {
+        return cast(JSON.parse(json), r("Position"));
     }
 
-    public static botToJson(value: Bot): string {
-        return JSON.stringify(uncast(value, r("Bot")), null, 2);
+    public static positionToJson(value: Position): string {
+        return JSON.stringify(uncast(value, r("Position")), null, 2);
     }
 }
 
@@ -193,20 +187,16 @@ function r(name: string) {
 }
 
 const typeMap: any = {
-    "Bot": o([
-        { json: "base_currency", js: "base_currency", typ: u(undefined, "") },
-        { json: "condition", js: "condition", typ: u(undefined, "") },
-        { json: "created_at", js: "created_at", typ: u(undefined, r("TimestampSchema")) },
-        { json: "exchange", js: "exchange", typ: u(undefined, r("ExchangeEntity")) },
+    "Position": o([
+        { json: "bot_id", js: "bot_id", typ: u(undefined, "") },
         { json: "id", js: "id", typ: u(undefined, "") },
-        { json: "name", js: "name", typ: u(undefined, "") },
+        { json: "status", js: "status", typ: u(undefined, r("PositionStatusSchema")) },
+        { json: "symbol", js: "symbol", typ: u(undefined, "") },
         { json: "trading_amount", js: "trading_amount", typ: u(undefined, "") },
+        { json: "validation", js: "validation", typ: u(undefined, "") },
     ], "any"),
-    "TimestampSchema": o([
-        { json: "nanos", js: "nanos", typ: u(undefined, 0) },
-        { json: "seconds", js: "seconds", typ: u(undefined, 0) },
-    ], "any"),
-    "ExchangeEntity": [
-        "binance",
+    "PositionStatusSchema": [
+        "closed",
+        "open",
     ],
 };

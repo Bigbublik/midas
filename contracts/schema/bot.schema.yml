@@ -1,4 +1,13 @@
 $schema: "https://json-schema.org/draft/2020-12/schema"
 title: "Bot Schema"
 type: "object"
-properties: {}
+properties:
+  id: { type: string }
+  created_at:
+    $ref: ./timestamp.json
+  name: { type: string }
+  exchange:
+    $ref: ./exchange.json
+  base_currency: { type: string }
+  trading_amount: { type: string }
+  condition: { type: string }
