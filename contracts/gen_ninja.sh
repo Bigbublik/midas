@@ -15,13 +15,13 @@ rule yq
   description = YAML -> JSON Schema
 
 rule frontend
-  command = npx quicktype --src \$in -o \$out \
+  command = npx quicktype --no-ignore-json-refs --src \$in -o \$out \
     -l ts --acronym-style original \
     -s schema
   description = JSON Schema -> Frontend
 
 rule backend
-  command = npx quicktype --src \$in -o \$out -l rust \
+  command = npx quicktype --no-ignore-json-refs --src \$in -o \$out -l rust \
     --density dense \
     --visibility public \
     --derive-{debug,clone,partial-eq} \

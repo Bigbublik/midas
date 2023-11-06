@@ -3,11 +3,11 @@ rule yq
   description = YAML -> JSON Schema
 
 rule frontend
-  command = npx quicktype --src $in -o $out     -l ts --acronym-style original     -s schema
+  command = npx quicktype --no-ignore-json-refs --src $in -o $out     -l ts --acronym-style original     -s schema
   description = JSON Schema -> Frontend
 
 rule backend
-  command = npx quicktype --src $in -o $out -l rust     --density dense     --visibility public     --derive-{debug,clone,partial-eq}     -s schema
+  command = npx quicktype --no-ignore-json-refs --src $in -o $out -l rust     --density dense     --visibility public     --derive-{debug,clone,partial-eq}     -s schema
   description = JSON Schema -> Rust
 build /home/hyamamoto/Documents/Workspace/midas/contracts/build/test_price_base.json: yq /home/hyamamoto/Documents/Workspace/midas/contracts/schema/test_price_base.schema.yml
 build /home/hyamamoto/Documents/Workspace/midas/contracts/../frontend/src/rpc/test_price_base.ts: frontend /home/hyamamoto/Documents/Workspace/midas/contracts/build/test_price_base.json
@@ -15,6 +15,12 @@ build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/sr
 build /home/hyamamoto/Documents/Workspace/midas/contracts/build/position_status.json: yq /home/hyamamoto/Documents/Workspace/midas/contracts/schema/position_status.schema.yml
 build /home/hyamamoto/Documents/Workspace/midas/contracts/../frontend/src/rpc/position_status.ts: frontend /home/hyamamoto/Documents/Workspace/midas/contracts/build/position_status.json
 build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/src/position_status.rs: backend /home/hyamamoto/Documents/Workspace/midas/contracts/build/position_status.json
+build /home/hyamamoto/Documents/Workspace/midas/contracts/build/api_key.json: yq /home/hyamamoto/Documents/Workspace/midas/contracts/schema/api_key.schema.yml
+build /home/hyamamoto/Documents/Workspace/midas/contracts/../frontend/src/rpc/api_key.ts: frontend /home/hyamamoto/Documents/Workspace/midas/contracts/build/api_key.json
+build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/src/api_key.rs: backend /home/hyamamoto/Documents/Workspace/midas/contracts/build/api_key.json
+build /home/hyamamoto/Documents/Workspace/midas/contracts/build/history_fetch_request.json: yq /home/hyamamoto/Documents/Workspace/midas/contracts/schema/history_fetch_request.schema.yml
+build /home/hyamamoto/Documents/Workspace/midas/contracts/../frontend/src/rpc/history_fetch_request.ts: frontend /home/hyamamoto/Documents/Workspace/midas/contracts/build/history_fetch_request.json
+build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/src/history_fetch_request.rs: backend /home/hyamamoto/Documents/Workspace/midas/contracts/build/history_fetch_request.json
 build /home/hyamamoto/Documents/Workspace/midas/contracts/build/position.json: yq /home/hyamamoto/Documents/Workspace/midas/contracts/schema/position.schema.yml
 build /home/hyamamoto/Documents/Workspace/midas/contracts/../frontend/src/rpc/position.ts: frontend /home/hyamamoto/Documents/Workspace/midas/contracts/build/position.json
 build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/src/position.rs: backend /home/hyamamoto/Documents/Workspace/midas/contracts/build/position.json
@@ -27,9 +33,21 @@ build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/sr
 build /home/hyamamoto/Documents/Workspace/midas/contracts/build/bookticker.json: yq /home/hyamamoto/Documents/Workspace/midas/contracts/schema/bookticker.schema.yml
 build /home/hyamamoto/Documents/Workspace/midas/contracts/../frontend/src/rpc/bookticker.ts: frontend /home/hyamamoto/Documents/Workspace/midas/contracts/build/bookticker.json
 build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/src/bookticker.rs: backend /home/hyamamoto/Documents/Workspace/midas/contracts/build/bookticker.json
+build /home/hyamamoto/Documents/Workspace/midas/contracts/build/history_progress.json: yq /home/hyamamoto/Documents/Workspace/midas/contracts/schema/history_progress.schema.yml
+build /home/hyamamoto/Documents/Workspace/midas/contracts/../frontend/src/rpc/history_progress.ts: frontend /home/hyamamoto/Documents/Workspace/midas/contracts/build/history_progress.json
+build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/src/history_progress.rs: backend /home/hyamamoto/Documents/Workspace/midas/contracts/build/history_progress.json
+build /home/hyamamoto/Documents/Workspace/midas/contracts/build/api_rename_request.json: yq /home/hyamamoto/Documents/Workspace/midas/contracts/schema/api_rename_request.schema.yml
+build /home/hyamamoto/Documents/Workspace/midas/contracts/../frontend/src/rpc/api_rename_request.ts: frontend /home/hyamamoto/Documents/Workspace/midas/contracts/build/api_rename_request.json
+build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/src/api_rename_request.rs: backend /home/hyamamoto/Documents/Workspace/midas/contracts/build/api_rename_request.json
 build /home/hyamamoto/Documents/Workspace/midas/contracts/build/status.json: yq /home/hyamamoto/Documents/Workspace/midas/contracts/schema/status.schema.yml
 build /home/hyamamoto/Documents/Workspace/midas/contracts/../frontend/src/rpc/status.ts: frontend /home/hyamamoto/Documents/Workspace/midas/contracts/build/status.json
 build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/src/status.rs: backend /home/hyamamoto/Documents/Workspace/midas/contracts/build/status.json
+build /home/hyamamoto/Documents/Workspace/midas/contracts/build/status_check_request.json: yq /home/hyamamoto/Documents/Workspace/midas/contracts/schema/status_check_request.schema.yml
+build /home/hyamamoto/Documents/Workspace/midas/contracts/../frontend/src/rpc/status_check_request.ts: frontend /home/hyamamoto/Documents/Workspace/midas/contracts/build/status_check_request.json
+build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/src/status_check_request.rs: backend /home/hyamamoto/Documents/Workspace/midas/contracts/build/status_check_request.json
+build /home/hyamamoto/Documents/Workspace/midas/contracts/build/api_key_list.json: yq /home/hyamamoto/Documents/Workspace/midas/contracts/schema/api_key_list.schema.yml
+build /home/hyamamoto/Documents/Workspace/midas/contracts/../frontend/src/rpc/api_key_list.ts: frontend /home/hyamamoto/Documents/Workspace/midas/contracts/build/api_key_list.json
+build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/src/api_key_list.rs: backend /home/hyamamoto/Documents/Workspace/midas/contracts/build/api_key_list.json
 build /home/hyamamoto/Documents/Workspace/midas/contracts/build/exchange.json: yq /home/hyamamoto/Documents/Workspace/midas/contracts/schema/exchange.schema.yml
 build /home/hyamamoto/Documents/Workspace/midas/contracts/../frontend/src/rpc/exchange.ts: frontend /home/hyamamoto/Documents/Workspace/midas/contracts/build/exchange.json
 build /home/hyamamoto/Documents/Workspace/midas/contracts/../backend/libs/rpc/src/exchange.rs: backend /home/hyamamoto/Documents/Workspace/midas/contracts/build/exchange.json

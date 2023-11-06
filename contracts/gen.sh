@@ -3,7 +3,7 @@
 
 DIR=$(realpath $(dirname "$0"))
 SCHEMA_DIR=$DIR/schema
-NAME=${1/_/ }
+NAME=${1//_/ }
 NAME=${NAME^}
 
 if [ -z "$1" ]; then
@@ -12,6 +12,6 @@ if [ -z "$1" ]; then
 fi
 
 $DIR/../deps/yq/bin/yq \
-  ".title = \"$NAME Schema\" | .\$id = \"/$1\" " \
+  ".title = \"$NAME schema\" | .\$id = \"/$1\" " \
   $SCHEMA_DIR/template.schema.yml \
 > $SCHEMA_DIR/$1.schema.yml
