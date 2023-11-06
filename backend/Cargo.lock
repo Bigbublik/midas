@@ -2841,6 +2841,10 @@ dependencies = [
 [[package]]
 name = "rpc"
 version = "0.1.0"
+
+[[package]]
+name = "rpc_od"
+version = "0.1.0"
 dependencies = [
  "bson",
  "clap",

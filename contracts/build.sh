@@ -23,4 +23,9 @@ for schema_in in $files; do
     -s schema
 
   echo "JSONS -> Backend: $schema_in"
+  npx quicktype \
+    --src "$JSON_SCHEMA" \
+    -o "$DIR/../backend/libs/rpc/src/$(basename $JSON_SCHEMA .json).rs" \
+    -l rust --density dense --visibility public --derive-{debug,clone,partial-eq} \
+    -s schema
 done

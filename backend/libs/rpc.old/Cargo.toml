@@ -1,5 +1,5 @@
 [package]
-name = "rpc"
+name = "rpc_od"
 version = "0.1.0"
 authors = ["Hiroaki Yamamoto <hiroaki@hysoftware.net>"]
 edition = "2021"
