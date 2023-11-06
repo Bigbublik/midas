@@ -4,21 +4,16 @@
 // extern crate serde_derive;
 // extern crate serde_json;
 //
-// use generated_module::bookticker;
+// use generated_module::insert_one_result;
 //
 // fn main() {
 //     let json = r#"{"answer": 42}"#;
-//     let model: bookticker = serde_json::from_str(&json).unwrap();
+//     let model: insert_one_result = serde_json::from_str(&json).unwrap();
 // }
 
 use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Bookticker {
-    pub ask_price: Option<String>,
-    pub ask_qty: Option<String>,
-    pub bid_price: Option<String>,
-    pub bid_qty: Option<String>,
+pub struct InsertOneResult {
     pub id: Option<String>,
-    pub symbol: Option<String>,
 }
