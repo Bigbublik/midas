@@ -6,7 +6,8 @@
   "author": "Hiroaki Yamamoto",
   "license": "MIT",
   "scripts": {
-    "build": "./build.sh"
+    "build": "./gen_ninja.sh && ninja",
+    "gen": "./gen.sh"
   },
   "dependencies": {
     "quicktype": "^23.0.77"
